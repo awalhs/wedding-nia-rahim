@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Wedding Nur & Rahim </title>
+  <title> Wedding Nia & Rahim </title>
   <link rel="icon" type="image/x-icon" href="assets/images/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
   <style>
@@ -181,13 +181,6 @@
     .couple-name { font-size: clamp(2.2rem, 4dvw, 3.5rem); color: var(--gold); line-height: 1; margin-bottom: .5rem; }
     .couple-fullname { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 1.8dvw, 1.25rem); letter-spacing: .04em; margin-bottom: .5rem; }
     .couple-parents { font-size: clamp(.75rem, 1.3dvw, .85rem); opacity: .6; line-height: 1.7; }
-    .ig-btn {
-      display: inline-block; margin-top: 1rem; padding: .45rem 1.2rem;
-      border: 1px solid rgba(255,255,255,.3); border-radius: 100px;
-      font-size: .75rem; letter-spacing: .1em; text-decoration: none;
-      color: rgba(255,255,255,.7); transition: border-color .3s, color .3s;
-    }
-    .ig-btn:hover { border-color: var(--gold); color: var(--gold); }
     .couple-ampersand {
       font-family: 'Great Vibes', cursive; font-size: clamp(4rem, 8dvw, 7rem);
       color: var(--gold); opacity: .75; line-height: 1; user-select: none;
@@ -213,7 +206,6 @@
       display: grid; grid-template-columns: 1fr 1fr;
       min-height: 100dvh; width: 100%;
     }
-    /* Foto kiri */
     .std-photo { position: relative; overflow: hidden; }
     .std-photo-img {
       position: absolute; inset: 0;
@@ -222,19 +214,16 @@
       transition: transform 12s ease;
     }
     #s-event:hover .std-photo-img { transform: scale(1.04); }
-    /* Overlay: gradasi hanya di sisi kanan (tempat teks), foto tetap terlihat jelas */
     .std-photo-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to right, rgba(0,0,0,.05) 0%, rgba(10,10,10,.55) 100%);
     }
-    /* Garis pemisah vertikal tipis */
     .std-photo::after {
       content: ''; position: absolute; top: 10%; bottom: 10%; right: 0;
       width: 1px;
       background: linear-gradient(to bottom, transparent, rgba(201,168,76,.45), transparent);
     }
 
-    /* Konten kanan */
     .std-content {
       display: flex; flex-direction: column;
       justify-content: center; align-items: flex-start;
@@ -267,7 +256,37 @@
       background: linear-gradient(90deg, var(--gold), transparent);
       margin-bottom: 1.6rem;
     }
-    /* Countdown */
+    
+    /* DOUBLE COUNTDOWN STYLES */
+    .countdown-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+    }
+    .countdown-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .cd-divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    @media (min-width: 769px) {
+      .countdown-wrapper {
+        flex-direction: row;
+        align-items: center;
+        gap: 2.5rem;
+      }
+      .cd-divider {
+        width: 1px;
+        height: 80px;
+        background: linear-gradient(180deg, transparent, var(--gold), transparent);
+      }
+    }
+
     .std-countdown {
       display: flex; gap: clamp(.6rem, 2vw, 1.5rem);
       margin-bottom: 1.6rem; flex-wrap: wrap;
@@ -285,22 +304,11 @@
       color: var(--gold); opacity: .25;
       align-self: flex-start; margin-top: .05rem;
     }
-    /* Date pill */
-    .std-date-pill {
-      display: inline-flex; align-items: center; gap: .6rem;
-      padding: .5rem 1.1rem;
-      border: 1px solid rgba(201,168,76,.35); border-radius: 100px;
-      font-size: .68rem; letter-spacing: .15em;
-      color: rgba(255,255,255,.65);
-    }
-    .std-date-pill svg { width: 13px; height: 13px; stroke: var(--gold); fill: none; stroke-width: 1.8; flex-shrink: 0; }
-    .std-date-pill span { color: var(--gold); }
 
-    /* Mobile: foto jadi full-screen background */
+    /* Mobile view s-event */
     @media (max-width: 768px) {
       .std-layout { grid-template-columns: 1fr; position: relative; min-height: 100dvh; }
       .std-photo { position: absolute; inset: 0; }
-      /* Mobile: overlay lebih gelap ke bawah agar teks terbaca, tapi foto masih kelihatan di atas */
       .std-photo-overlay {
         background: linear-gradient(to bottom,
           rgba(0,0,0,.08) 0%,
@@ -320,10 +328,12 @@
       .std-title      { font-size: clamp(2.2rem, 8vw, 3rem); }
       .std-date-big   { margin-bottom: 1rem; font-size: .82rem; }
       .std-divider    { margin: 0 auto 1rem; }
+      
+      .countdown-box { align-items: center; }
       .std-countdown  { margin-bottom: 1rem; justify-content: center; }
       .std-cd-num     { font-size: clamp(1.5rem, 6vw, 2.2rem); }
       .std-cd-item    { align-items: center; }
-      .std-date-pill  { max-width: 100%; white-space: normal; justify-content: center; }
+      .cd-divider { margin: 0.5rem auto; }
     }
 
     /* ══ S3B – DETAIL ACARA ══ */
@@ -341,7 +351,6 @@
     }
     .detail-header { text-align: center; margin-bottom: 1.4rem; }
 
-    /* Baris 1: Akad | Tanggal | Resepsi */
     .detail-row1 {
       display: grid;
       grid-template-columns: 1fr 1px 1fr 1px 1fr;
@@ -359,13 +368,10 @@
     .ev-col:last-child { text-align: right; align-items: flex-end; }
     .ev-col:nth-child(3) { text-align: center; align-items: center; }
     .ev-label { font-size: clamp(.52rem,1.2vw,.65rem); letter-spacing: .28em; text-transform: uppercase; opacity: .45; }
-    .ev-time { font-family:'Cormorant Garamond',serif; font-size: clamp(2.2rem,9vw,4.5rem); color: var(--gold); font-weight:300; line-height:1; }
-
-    /* Range waktu — dua angka besar + tanda pisah di tengah */
+    
     .ev-time-range {
       display: flex; align-items: baseline; gap: .1em;
       font-family: 'Cormorant Garamond', serif;
-      /* Desktop: 3.5rem; Tablet: ~7vw; Mobile 480px: ~5.5vw; Mobile 360px: clamp ke 1.5rem */
       font-size: clamp(1.5rem, 7vw, 3.5rem);
       color: var(--gold); font-weight: 300; line-height: 1;
     }
@@ -373,7 +379,6 @@
       font-size: .45em; opacity: .3; letter-spacing: 0;
       align-self: center; flex-shrink: 0; margin: 0 .05em;
     }
-    /* Angka kecil menit (.00) */
     .ev-time-range small { font-size: .42em; opacity: .55; }
 
     .ev-sub  { font-size: clamp(.6rem,1.4vw,.72rem); opacity: .5; letter-spacing: .12em; }
@@ -382,7 +387,6 @@
     .ev-center-year { font-size: clamp(.52rem,1.1vw,.62rem); letter-spacing: .25em; opacity: .35; }
     .ev-name { font-family:'Cormorant Garamond',serif; font-size: clamp(.82rem,2vw,1.1rem); opacity: .8; font-style: italic; }
 
-    /* Baris 2: Foto + Lokasi */
     .detail-row2 {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: clamp(.75rem,1.8vw,1.2rem);
@@ -395,22 +399,17 @@
       position: absolute; inset: 0;
       background-image: url('assets/images/bg2.jpeg');
       background-size: cover; background-position: center 40%;
-      /* Foto tetap terang, hanya ada shadow di area teks */
       filter: brightness(.75) saturate(.85);
       transition: transform 8s ease, filter .5s;
     }
     .detail-photo:hover .detail-photo-bg { transform: scale(1.04); filter: brightness(.85) saturate(.9); }
-    /* Overlay gradient hanya di pojok bawah untuk teks */
     .detail-photo-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.25) 35%, transparent 65%);
       display: flex; align-items: flex-end;
       padding: clamp(.6rem,1.2vw,1rem);
     }
-    .detail-photo-date-wrap { display: flex; align-items: flex-end; gap: .4rem; }
-    .detail-photo-date .dpd-day  { font-family:'Cormorant Garamond',serif; font-size: clamp(2rem,4vw,3rem); color: var(--gold); line-height:.9; }
-    .detail-photo-date .dpd-rest { font-size: clamp(.58rem,1.1vw,.66rem); letter-spacing: .25em; text-transform: uppercase; opacity: .65; }
-
+    
     .detail-loc {
       display: flex; flex-direction: column; justify-content: space-between;
       border: 1px solid rgba(201,168,76,.18); border-radius: 14px;
@@ -494,24 +493,37 @@
 
     /* ══ SECTION 5 – GALLERY ══ */
     #s-gallery { background: var(--dark); }
+    
     .gallery-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: clamp(.5rem, 1.5vw, 1rem); max-width: 1000px; width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Default Desktop 3 Kolom */
+      gap: clamp(.5rem, 1.5vw, 1rem);
+      max-width: 1000px;
+      width: 100%;
     }
-    @media (max-width: 540px) { .gallery-grid { grid-template-columns: 1fr 1fr; } }
-    .gallery-item { position: relative; overflow: hidden; border-radius: 10px; cursor: pointer; }
-    .gallery-item::after {
-      content: '⊕'; position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; color: var(--gold); background: rgba(0,0,0,.45);
-      opacity: 0; transition: opacity .35s;
+
+    /* Tampilan Mobile & Tablet (Dibawah 768px) */
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr); /* Paksa 2 Kolom di Mobile */
+      }
     }
-    .gallery-item:hover::after { opacity: 1; }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      cursor: pointer;
+      aspect-ratio: 3/4; /* Biar ukuran foto seragam */
+    }
+
     .gallery-img {
-      width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
-      transition: transform .5s, filter .5s; filter: brightness(.85) saturate(.9);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s;
     }
-    .gallery-item:hover .gallery-img { transform: scale(1.06); filter: brightness(1) saturate(1); }
 
     /* Lightbox */
     #lightbox {
@@ -546,66 +558,6 @@
     #lightbox .lb-prev { left: 1rem; }
     #lightbox .lb-next { right: 1rem; }
 
-    /* ══ SECTION 6 – STORY OF US ══ */
-    #s-story { background: var(--dark); }
-
-    /* Desktop: grid 2 kolom — foto kiri, teks kanan */
-    .story-layout {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem,5vw,4rem); align-items: start;
-      max-width: 1000px; width: 100%;
-    }
-
-    /* Foto kolom kiri — desktop: 4 foto di grid 2x2 sticky */
-    .story-photos {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: .6rem; position: sticky; top: 5rem;
-    }
-    /* Foto besar atas: landscape 16/7 (seperti foto pada acara) */
-    .story-photos .sp-main {
-      grid-column: 1 / -1; width: 100%;
-      aspect-ratio: 16/7; object-fit: cover; object-position: center 60%;
-      border-radius: 12px; filter: brightness(.85) saturate(.9);
-      transition: filter .4s; display: block;
-    }
-    .story-photos .sp-main:hover { filter: brightness(1) saturate(1); }
-    .story-photos .sp-small {
-      width: 100%; aspect-ratio: 1; object-fit: cover;
-      border-radius: 10px; filter: brightness(.8) saturate(.85);
-      transition: filter .4s, transform .4s; display: block;
-    }
-    .story-photos .sp-small:hover { filter: brightness(1) saturate(1); transform: scale(1.03); }
-
-    /* Mobile: foto dalam satu baris horizontal scroll atau grid 2x2 biasa */
-    @media (max-width: 700px) {
-      .story-layout { grid-template-columns: 1fr; }
-      .story-photos {
-        position: static;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: .5rem; order: -1;
-      }
-      /* Mobile: foto besar tetap landscape tapi tidak se-wide desktop */
-      .story-photos .sp-main {
-        grid-column: 1 / -1;
-        aspect-ratio: 16/7; border-radius: 10px;
-      }
-      /* 3 foto kecil di bawahnya */
-      .story-photos .sp-small { aspect-ratio: 1; }
-    }
-
-    .story-title { font-size: clamp(2.5rem, 5dvw, 4rem); color: var(--gold); line-height: 1; margin-bottom: 1.5rem; }
-    .story-paragraph {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(.95rem, 1.8dvw, 1.08rem);
-      line-height: 1.95; opacity: .78; margin-bottom: 1.4rem;
-    }
-    .story-paragraph:last-child { margin-bottom: 0; }
-    .story-date-badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .4rem 1rem; border: 1px solid rgba(201,168,76,.4);
-      border-radius: 100px; font-size: .7rem; letter-spacing: .18em;
-      color: var(--gold); margin: .75rem 0 1.4rem;
-    }
-
     /* ══ SECTION 7 – RSVP ══ */
     #s-rsvp { background: var(--dark-2); }
     .rsvp-wrap { width: 100%; max-width: 520px; padding: clamp(4rem,8dvh,6rem) clamp(1.5rem,5vw,3rem); }
@@ -630,7 +582,6 @@
     }
     .submit-btn:hover { opacity: .85; transform: translateY(-1px); }
 
-    /* ══ RSVP QUOTE STYLE ══ */
     .rsvp-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
     .rsvp-quote-card {
       position: relative;
@@ -666,7 +617,6 @@
     .rsvp-quote-badge.tidak  { background: rgba(248,113,113,.1); color: #f87171; border: 1px solid rgba(248,113,113,.25); }
     .rsvp-quote-time { font-size: .57rem; opacity: .28; }
 
-    /* Pagination */
     .rsvp-pagination {
       display: flex; align-items: center; justify-content: center;
       gap: .4rem; margin-top: 1.4rem; flex-wrap: wrap;
@@ -778,17 +728,15 @@
 </head>
 <body>
 
-<!-- ══ LOADING SCREEN ══ -->
 <div id="loading-screen">
   <div class="ls-gunungan">
-    <img src="assets/images/splash.png" alt="Loading Icon" style="width: 100px; height: auto;">
+  <img src="assets/images/splash.png" alt="Loading Icon" style="width: 100px; height: auto;">
   </div>
-  <p class="ls-title">Nur &amp; Rahim</p>
-  <p style="font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.4;margin-bottom:.8rem;">14 · April · 2026</p>
+  <p class="ls-title">Nia & Rahim</p>
+  <p style="font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.4;margin-bottom:.8rem;">13 & 14 April 2026</p>
   <div class="ls-bar-wrap"><div class="ls-bar"></div></div>
 </div>
 
-<!-- ══ AUDIO PLAYER ══ -->
 <div id="audio-player">
   <button class="audio-btn" id="audioBtn" onclick="toggleAudio()" title="Musik latar">
     <svg id="audioIconPlay" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="var(--gold)" stroke="none"/></svg>
@@ -799,7 +747,6 @@
   <source src="assets/music/wedding-music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ══ OPENING ══ -->
 <section id="opening">
   <div class="opening-bg"></div>
   <div class="opening-overlay"></div>
@@ -808,12 +755,12 @@
     <p style="font-size:.75rem;opacity:.55;letter-spacing:.15em;margin-bottom:.4rem;">Kepada yang terhormat Bapak/Ibu/Saudara/i</p>
     <p id="guestName" class="serif" style="font-size:clamp(1.1rem,2.5dvw,1.4rem);font-style:italic;opacity:.9;">Tamu Undangan</p>
     <button id="openBtn" class="open-btn" style="margin-top:2.5rem;"><span>Buka Undangan</span></button>
-    <p style="font-size:.65rem;opacity:.3;margin-top:1.5rem;letter-spacing:.12em;">14 · 04 · 2026</p>
+    <p style="font-size:.65rem;opacity:.3;margin-top:1.5rem;letter-spacing:.12em;">13 & 14 April 2026</p>
   </div>
 
   <div style="position: absolute; bottom: clamp(1.5rem, 4vh, 2.5rem); width: 100%; text-align: center; z-index: 10;">
     <span style="display:block; font-size:0.6rem; opacity: 0.55; letter-spacing: 0.15em; margin-bottom: 0.5rem; text-transform: uppercase;">
-      © 2026 Nur & Rahim · With Love
+      © 2026 Nia & Rahim · With Love
     </span>
     <span style="display:block; font-size:0.65rem; letter-spacing:0.15em; opacity: 0.9;">
       Digital Wedding Invitation By - 
@@ -834,52 +781,42 @@
   </script>
 </section>
 
-<!-- ══ NAV DOCK ══ -->
 <nav id="nav-dock" aria-label="Navigasi cepat">
-  <!-- Beranda -->
   <button class="dock-btn active" onclick="scrollToSection('#s-hero')" data-section="s-hero">
     <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     Beranda
   </button>
-  <!-- Kami -->
   <button class="dock-btn" onclick="scrollToSection('#s-couple')" data-section="s-couple">
     <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M19 8a2 2 0 110 4"/><path d="M21 21v-2a3 3 0 00-2-2.83"/></svg>
     Kami
   </button>
-  <!-- Hitung Mundur -->
   <button class="dock-btn" onclick="scrollToSection('#s-event')" data-section="s-event">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
     Waktu
   </button>
-  <!-- Acara -->
   <button class="dock-btn" onclick="scrollToSection('#s-detail')" data-section="s-detail">
     <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     Acara
   </button>
-  <!-- Hadiah -->
   <button class="dock-btn" onclick="scrollToSection('#s-gift')" data-section="s-gift">
     <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
     Hadiah
   </button>
-  <!-- Galeri -->
   <button class="dock-btn" onclick="scrollToSection('#s-gallery')" data-section="s-gallery">
     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
     Galeri
   </button>
   
-  <!-- RSVP -->
   <button class="dock-btn" onclick="scrollToSection('#s-rsvp')" data-section="s-rsvp">
     <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
     RSVP
   </button>
-  <!-- Penutup -->
   <button class="dock-btn" onclick="scrollToSection('#s-closing')" data-section="s-closing">
     <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
     Penutup
   </button>
 </nav>
 
-<!-- ══ SECTION 1 – HERO ══ -->
 <section id="s-hero" class="page-section" style="overflow:hidden;">
   <div id="bg1" class="parallax-bg" style="background-image:url('assets/images/bg1.jpeg');"></div>
   <div id="bg2" class="parallax-bg" style="opacity:0;"></div>
@@ -896,7 +833,6 @@
   </div>
 </section>
 
-<!-- ══ SECTION 2 – COUPLE ══ -->
 <section id="s-couple" class="page-section">
   <div class="gunungan-corner" style="top:10px;right:10px;width:160px;">
     <svg viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -931,13 +867,12 @@
         <div style="flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent);"></div>
       </div>
       <p style="font-size:clamp(.72rem,1.3dvw,.82rem);opacity:.5;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.9rem;">
-        Dengan rahmat &amp; ridho Allah
-        <span class="serif" style="font-style:italic;text-transform:none;letter-spacing:0;">Subhanahu Wa Ta'ala</span>
+        Dengan rahmat & ridho Allah SWT
       </p>
       <p class="serif" style="font-size:clamp(.95rem,1.8dvw,1.1rem);opacity:.72;line-height:1.95;max-width:460px;margin:0 auto;">
         Kami mengundang Bapak / Ibu / Saudara/i<br>
-        untuk turut hadir &amp; mendoakan<br>
-        dalam <em class="gold">pernikahan kami</em>
+        untuk turut hadir & mendoakan dalam <br>
+        <em class="gold">Pernikahan Kami</em>
       </p>
     </div>
     <div class="couple-grid">
@@ -945,9 +880,9 @@
         <div class="couple-img-wrap">
           <img src="assets/images/scene2(2).jpeg" alt="Nur" class="couple-img">
         </div>
-        <h2 class="script couple-name">Nur</h2>
+        <h2 class="script couple-name">Nia</h2>
         <p class="serif couple-fullname">Nur Asniah Hasibuan</p>
-        <p class="couple-parents">Putri Bungsu dari<br>Bpk. Alm. Sahdan Hasibuan &amp; Ibu Hj. Nur Ainun Pasaribu</p>
+        <p class="couple-parents">Putri Bungsu dari<br>Bpk. Alm. Sahdan Hasibuan & Ibu Hj. Nur Ainun Pasaribu</p>
         
       </div>
       <div class="couple-ampersand fade-in-up delay-200">&</div>
@@ -957,37 +892,43 @@
         </div>
         <h2 class="script couple-name">Rahim</h2>
         <p class="serif couple-fullname">Rahim Ibrahim Daulay</p>
-        <p class="couple-parents">Putra Ketiga dari<br>Bpk. H. Muhammad Ali Zumroh Daulay &amp; Ibu Hj. Rafiana</p>
+        <p class="couple-parents">Putra Ketiga dari<br>Bpk. H. Muhammad Ali Zumroh Daulay & Ibu Hj. Rafiana</p>
         
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ SECTION 3A – HITUNG MUNDUR ══ -->
 <section id="s-event">
   <div class="std-layout">
-    <!-- Foto kiri -->
     <div class="std-photo">
       <div class="std-photo-img"></div>
       <div class="std-photo-overlay"></div>
     </div>
-    <!-- Konten kanan -->
     <div class="std-content">
       <p class="std-eyebrow fade-in-up">Save the Date</p>
-      <h2 class="std-title fade-in-up delay-100">Nur &amp; Rahim</h2>
-      <p class="std-date-big fade-in-up delay-200">14 &middot; April &middot; 2026</p>
+      <h2 class="std-title fade-in-up delay-100">Nia & Rahim</h2>
       <div class="std-divider fade-in-up delay-200"></div>
-      <div class="std-countdown fade-in-up delay-300" id="countdown"></div>
-      <div class="std-date-pill fade-in-up delay-400">
-        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Selasa &middot; <span>Desa Ujung Batu, Kecamatan Sosa, Kabupaten Padang Lawas</span>
+
+      <div class="countdown-wrapper fade-in-up delay-300">
+        <div class="countdown-box">
+          <p class="std-date-big" style="margin-bottom: 0.3rem;">Akad Nikah</p>
+          <p style="font-size: 0.75rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.7); margin-bottom: 1rem; text-transform: uppercase;">13 Apr 2026</p>
+          <div class="std-countdown" id="countdown-akad" style="margin-bottom: 0;"></div>
+        </div>
+        
+        <div class="cd-divider"></div>
+
+        <div class="countdown-box">
+          <p class="std-date-big" style="margin-bottom: 0.3rem;">Resepsi</p>
+          <p style="font-size: 0.75rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.7); margin-bottom: 1rem; text-transform: uppercase;">14 Apr 2026</p>
+          <div class="std-countdown" id="countdown-resepsi" style="margin-bottom: 0;"></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ SECTION 3B – DETAIL ACARA ══ -->
 <section id="s-detail" class="page-section">
   <div class="detail-wrap">
     <div class="detail-header fade-in-up">
@@ -995,43 +936,31 @@
       <h2 class="script gold" style="font-size:clamp(2rem,4dvw,3rem);line-height:1;">Hari Pernikahan</h2>
     </div>
 
-    <!-- Baris 1: Akad | Tanggal | Resepsi -->
     <div class="detail-row1 fade-in-up delay-100">
-      <!-- Akad -->
       <div class="ev-col">
         <span class="ev-label">Akad Nikah</span>
         <span class="ev-time-range">
-          09<small>.00</small>
-          <span class="tr-sep">—</span>
-          Selesai
-        </span>
-        <span class="ev-sub">WIB &middot; Senin Pagi</span>
+          09<small>.00 WIB</small></span>
+        <span class="ev-sub">Senin</span>
         <span class="ev-name">Ijab Qabul</span>
       </div>
       <div class="row1-divider"></div>
-      <!-- Tanggal tengah -->
       <div class="ev-col">
-        <span class="ev-center-day">14</span>
+        <span class="ev-center-day">13&14</span>
         <span class="ev-center-month">April</span>
         <span class="ev-center-year">2026</span>
       </div>
       <div class="row1-divider"></div>
-      <!-- Resepsi -->
       <div class="ev-col" style="text-align:right;align-items:flex-end;">
         <span class="ev-label">Resepsi</span>
         <span class="ev-time-range">
-          08<small>.00</small>
-          <span class="tr-sep">—</span>
-          Selesai
-        </span>
-        <span class="ev-sub">WIB &middot; Selasa Pagi</span>
-        <span class="ev-name">Walimatul &lsquo;Ursy</span>
+          09<small>.00 WIB</small></span>
+        <span class="ev-sub">Selasa</span>
+        <span class="ev-name">Walimatul ‘Ursy</span>
       </div>
     </div>
 
-    <!-- Baris 2: Foto + Lokasi -->
     <div class="detail-row2 fade-in-up delay-200">
-      <!-- Foto -->
       <div class="detail-photo">
         <div class="detail-photo-bg"></div>
         <div class="detail-photo-overlay">
@@ -1039,7 +968,6 @@
           </div>
         </div>
       </div>
-      <!-- Lokasi -->
       <div class="detail-loc">
         <div class="loc-top">
           <p class="loc-pin-label">
@@ -1058,7 +986,6 @@
   </div>
 </section>
 
-<!-- ══ SECTION 4 – GIFT ══ -->
 <section id="s-gift" class="page-section">
   <div class="gunungan-corner" style="top:10px;right:10px;width:160px;">
     <svg viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -1084,7 +1011,7 @@
   </div>
   <div style="width:100%;max-width:1000px;padding:clamp(4rem,8dvh,6rem) clamp(1.5rem,5vw,3rem);">
     <p class="section-label fade-in-up" style="text-align:center;">Wedding Gift</p>
-    <h2 class="script gold section-title fade-in-up delay-100" style="margin-bottom:.4rem;">Hadiah &amp; Kado</h2>
+    <h2 class="script gold section-title fade-in-up delay-100" style="margin-bottom:.4rem;">Hadiah & Kado</h2>
     <div class="gunungan-divider fade-in-up delay-200">
       <svg viewBox="0 0 40 64" xmlns="http://www.w3.org/2000/svg" fill="none">
         <polygon points="20,2 38,60 2,60" stroke="#c9a84c" stroke-width="1.2" fill="rgba(201,168,76,.06)"/>
@@ -1135,45 +1062,44 @@
   </div>
 </section>
 
-<!-- ══ SECTION 5 – GALLERY ══ -->
 <section id="s-gallery" class="page-section">
   <div style="width:100%;max-width:1000px;padding:clamp(4rem,8dvh,6rem) clamp(1.5rem,5vw,3rem);">
     <p class="section-label fade-in-up" style="text-align:center;">Foto Kami</p>
     <h2 class="script gold section-title fade-in-up delay-100" style="margin-bottom:.4rem;">Galeri</h2>
+    
     <div class="gunungan-divider fade-in-up delay-200">
       <svg viewBox="0 0 40 64" xmlns="http://www.w3.org/2000/svg" fill="none">
-        <polygon points="20,2 38,60 2,60" stroke="#c9a84c" stroke-width="1.2" fill="rgba(201,168,76,.06)"/>
-        <polygon points="20,10 32,56 8,56" stroke="#c9a84c" stroke-width=".6" stroke-dasharray="2,2" fill="none" opacity=".4"/>
-        <circle cx="20" cy="3.5" r="2" fill="#c9a84c" opacity=".7"/>
-        <rect x="14" y="22" width="12" height="12" stroke="#c9a84c" stroke-width=".7" fill="rgba(201,168,76,.1)" opacity=".6"/>
-        <circle cx="20" cy="28" r="2.5" fill="#c9a84c" opacity=".45"/>
-        <rect x="12" y="52" width="16" height="5" rx="1.5" stroke="#c9a84c" stroke-width=".7" fill="rgba(201,168,76,.1)" opacity=".6"/>
+        <polygon points="20,2 38,60 2,60" stroke="#c9a84c" stroke-width="1.2" fill="rgba(201,168,76,.06)"></polygon>
+        <circle cx="20" cy="28" r="2.5" fill="#c9a84c" opacity=".45"></circle>
       </svg>
     </div>
+
     <div class="gallery-grid">
-      <div class="gallery-item fade-in-up delay-200" onclick="openLightbox(0)">
+      <div class="gallery-item fade-in-up delay-100" onclick="openLightbox(0)">
         <img src="assets/images/gallery (6).jpeg" alt="Gallery 1" class="gallery-img">
       </div>
-      <div class="gallery-item fade-in-up delay-300" onclick="openLightbox(1)">
+      <div class="gallery-item fade-in-up delay-200" onclick="openLightbox(1)">
         <img src="assets/images/gallery (1).jpeg" alt="Gallery 2" class="gallery-img">
       </div>
-      <div class="gallery-item fade-in-up delay-400" onclick="openLightbox(2)">
+      <div class="gallery-item fade-in-up delay-400" onclick="openLightbox(3)">
+        <img src="assets/images/gallery (1).jpeg" alt="Gallery 4" class="gallery-img">
+      </div>
+      <div class="gallery-item fade-in-up delay-300" onclick="openLightbox(2)">
         <img src="assets/images/gallery (8).jpeg" alt="Gallery 3" class="gallery-img">
-      </div>  
+      </div>
+      
     </div>
   </div>
 </section>
 
-<!-- LIGHTBOX -->
 <div id="lightbox">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
-  <button class="lb-prev" onclick="shiftLightbox(-1)">&#8592;</button>
+  <button class="lb-prev" onclick="shiftLightbox(-1)">←</button>
   <img id="lb-img" src="" alt="Preview">
-  <button class="lb-next" onclick="shiftLightbox(1)">&#8594;</button>
+  <button class="lb-next" onclick="shiftLightbox(1)">→</button>
 </div>
 
 
-<!-- ══ SECTION 7 – RSVP ══ -->
 <section id="s-rsvp" class="page-section">
   <div class="rsvp-wrap">
     <p class="section-label fade-in-up" style="text-align:center;">Kehadiran</p>
@@ -1209,7 +1135,6 @@
   </div>
 </section>
 
-<!-- ══ SECTION 8 – CLOSING ══ -->
 <section id="s-closing">
   <div class="closing-bg"></div>
   <div class="closing-overlay"></div>
@@ -1230,15 +1155,15 @@
     <div class="divider fade-in-up delay-300" style="max-width:200px;margin:0 auto 1.5rem;">
       <div class="divider-diamond"></div>
     </div>
-    <p class="script closing-sig fade-in-up delay-400">Nur &amp; Rahim</p>
+    <p class="script closing-sig fade-in-up delay-400">Nur & Rahim</p>
     <p class="fade-in-up delay-500" style="font-size:.7rem;letter-spacing:.3em;opacity:.4;margin-top:.75rem;text-transform:uppercase;">
-      14 · April · 2026
+      13 & 14 · April · 2026
     </p>
   </div>
 </section>
 
 <footer>
-  © 2026 Nur & Rahim · With Love <br>
+  © 2026 Nia & Rahim · With Love <br>
   <span style="display:inline-block; margin-top:0.8rem; font-size:0.6rem; letter-spacing:0.2em;">
     Wedding Invitation By - 
     <a href="https://instagram.com/awalhasibuan17" target="_blank" style="color:var(--gold); text-decoration:none; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
@@ -1249,7 +1174,6 @@
 
 <div id="toast"></div>
 
-<!-- ══ SCRIPTS ══ -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /* ── GUEST NAME ── */
@@ -1315,25 +1239,36 @@ setInterval(() => {
 }, 6000);
 
 /* ── COUNTDOWN ── */
-const target = new Date("2026-04-14T08:00:00").getTime();
-function updateCountdown(){
-  const el = document.getElementById("countdown");
+const targetAkad = new Date("2026-04-13T09:00:00").getTime();
+const targetResepsi = new Date("2026-04-14T08:00:00").getTime();
+
+function renderCountdown(targetDate, elementId) {
+  const el = document.getElementById(elementId);
   if(!el) return;
-  const diff = target - Date.now();
+  const diff = targetDate - Date.now();
+  
   if(diff <= 0){
-    el.innerHTML = "<span style='font-family:Cormorant Garamond,serif;color:var(--gold);font-size:1.1rem;'>Hari Bahagia Telah Tiba &#x1F389;</span>";
+    el.innerHTML = "<span style='font-family:Cormorant Garamond,serif;color:var(--gold);font-size:1rem;line-height:1.2;'>Acara Telah Berlangsung 🎉</span>";
     return;
   }
+  
   const vals = [Math.floor(diff/86400000), Math.floor((diff/3600000)%24), Math.floor((diff/60000)%60), Math.floor((diff/1000)%60)];
-  const lbls = ["Hari","Jam","Menit","Detik"];
+  const lbls = ["Hari","Jam","Mnt","Dtk"];
+  
   el.innerHTML = vals.map((v,i) => `
     <div class="std-cd-item">
-      <span class="std-cd-num">${String(v).padStart(2,"0")}</span>
+      <span class="std-cd-num" style="font-size: clamp(1.4rem, 3dvw, 2.2rem);">${String(v).padStart(2,"0")}</span>
       <span class="std-cd-lbl">${lbls[i]}</span>
-    </div>${i < 3 ? '<span class="std-cd-sep">:</span>' : ""}`).join("");
+    </div>${i < 3 ? '<span class="std-cd-sep" style="font-size: clamp(1rem, 2dvw, 1.5rem);">:</span>' : ""}`).join("");
 }
-setInterval(updateCountdown, 1000);
-updateCountdown();
+
+function updateAllCountdowns() {
+  renderCountdown(targetAkad, "countdown-akad");
+  renderCountdown(targetResepsi, "countdown-resepsi");
+}
+
+setInterval(updateAllCountdowns, 1000);
+updateAllCountdowns();
 
 /* ── SCROLL ANIMATIONS ── */
 const observer = new IntersectionObserver(entries => {
@@ -1442,21 +1377,21 @@ function renderRsvp(){
   list.innerHTML = slice.map(item => {
     const h = item.attendance === "Hadir";
     const msgHtml = item.message
-      ? `<p class="rsvp-quote-msg">&#x201C;${item.message}&#x201D;</p>`
-      : `<p class="rsvp-quote-empty">&#x2014; tidak ada pesan &#x2014;</p>`;
+      ? `<p class="rsvp-quote-msg">“${item.message}”</p>`
+      : `<p class="rsvp-quote-empty">— tidak ada pesan —</p>`;
     return `<div class="rsvp-quote-card">
       ${msgHtml}
       <div class="rsvp-quote-footer">
-        <span class="rsvp-quote-name">&#x2014; ${item.name}</span>
+        <span class="rsvp-quote-name">— ${item.name}</span>
         <span class="rsvp-quote-badge ${h?'hadir':'tidak'}">${item.attendance}</span>
         <span class="rsvp-quote-time">${timeAgo(item.created_at)}</span>
       </div>
     </div>`;
   }).join("");
   if(totalPages <= 1){ pg.innerHTML = ""; cnt.textContent = total > 0 ? `${total} tamu telah mengisi buku tamu` : ""; return; }
-  let btns = `<button class="pg-btn" onclick="goPage(${curPage-1})" ${curPage===1?"disabled":""}>&#8592;</button>`;
+  let btns = `<button class="pg-btn" onclick="goPage(${curPage-1})" ${curPage===1?"disabled":""}>←</button>`;
   for(let i=1;i<=totalPages;i++) btns += `<button class="pg-btn${i===curPage?" active":""}" onclick="goPage(${i})">${i}</button>`;
-  btns += `<button class="pg-btn" onclick="goPage(${curPage+1})" ${curPage===totalPages?"disabled":""}>&#8594;</button>`;
+  btns += `<button class="pg-btn" onclick="goPage(${curPage+1})" ${curPage===totalPages?"disabled":""}>→</button>`;
   pg.innerHTML = btns;
   cnt.textContent = `Halaman ${curPage} / ${totalPages} · ${total} tamu`;
 }
