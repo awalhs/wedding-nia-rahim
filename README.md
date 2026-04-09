@@ -1,2 +1,2 @@
-# wedding-web-rany-haqqy
-Ini adalah website undangan pernikahan Rany dan Haqqy, merupakan website undangan pertama yang saya kembangkan
+# wedding-web-Nia-Rahim
+Ini adalah website undangan pernikahan Nia dan Ibrahim
