@@ -114,7 +114,7 @@
 
     <div class="card">
         <label>Nama Tamu Undangan</label>
-        <input type="text" id="guestName" placeholder="Contoh: Tuan Oke Gas">
+        <input type="text" id="guestName" placeholder="Contoh: Budi Santoso & Partner">
 
         <label>URL Undangan (Vercel)</label>
         <input type="text" id="baseUrl" value="https://wedding-nia-rahim.vercel.app" placeholder="https://wedding-nia-rahim.vercel.app">
@@ -123,7 +123,7 @@
     </div>
 
     <div id="resultArea" class="result-area card">
-        <label>Link Khusus Tamu:</label>
+        <label>Link Khusus Tamu (Gunakan Tombol Kirim WhatsApp):</label>
         <div id="generatedLink" class="link-box"></div>
         
         <div class="action-btns">
@@ -149,11 +149,13 @@
             return;
         }
 
+        // Hapus slash di akhir URL agar format rapi
         if (baseUrl.endsWith('/')) {
             baseUrl = baseUrl.slice(0, -1);
         }
 
-        // Menggunakan %20 agar spasi tidak berubah jadi tanda plus (+)
+        // Trik Spasi: Menggunakan encodeURIComponent 
+        // agar spasi menjadi %20 (Link utuh di WhatsApp, tanpa tanda + di browser)
         const encodedName = encodeURIComponent(name);
         const finalLink = `${baseUrl}/?to=${encodedName}`;
 
@@ -164,7 +166,7 @@
     function copyLink() {
         const link = document.getElementById('generatedLink').innerText;
         navigator.clipboard.writeText(link).then(() => {
-            alert("Link berhasil disalin!");
+            alert("Link berhasil disalin ke clipboard!");
         });
     }
 
@@ -173,7 +175,7 @@
         const link = document.getElementById('generatedLink').innerText;
         const guest = name ? name : "Tamu Undangan";
 
-        // Format Pesan KHUSUS NIA & RAHIM
+        // TEMPLATE PESAN NIA & RAHIM (UTUH)
         const message = `Yth. Bapak/Ibu/Saudara/i%0A*${guest}*%0ADi Tempat%0A---------------------------%0A_Assalamualaikum Wr. Wb._%0ADengan segala kerendahan hati,%0Akami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,%0A=============%0A*Nia %26 Rahim*%0A=============%0A*♥️Save The Date♥️*%0A----------------%0A_Akad Nikah_%0A📅 Tanggal : *13 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A%0A_Resepsi_%0A📅 Tanggal : *14 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A_Tempat_%0A🏠 *Desa Ujung Batu, Kecamatan Sosa, Kabupaten Padang Lawas*%0A-----------------%0AUntuk detail acaranya, bisa kunjungi link berikut.👇%0A${link}%0A%0A(Note: Disarankan Menggunakan Browser Chrome)%0A%0AKami sangat berharap Bapak/Ibu/Saudara/i dan teman-teman dapat menghadiri acara tersebut,%0A--------------------------------%0AWassalamualaikum Wr. Wb,%0A🙏 Hormat Kami,%0A_Nia %26 Rahim_`;
         
         window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
