@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Kelola Tamu - Nia & Rahim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --dark: #0a0a0a;
+            --dark-2: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--dark);
+            color: var(--white);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 { color: var(--gold); text-align: center; margin-bottom: 10px; font-weight: 600; }
+        .sub-title { text-align: center; opacity: 0.6; font-size: 0.9rem; margin-bottom: 30px; letter-spacing: 0.1em; }
+
+        .card {
+            background: var(--dark-2);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background: #222;
+            border: 1px solid #333;
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            font-family: 'Jost', sans-serif;
+            font-size: 1rem;
+        }
+
+        input:focus { border-color: var(--gold); outline: none; background: #282828; }
+
+        .btn {
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(201, 168, 76, 0.3); }
+
+        .result-area {
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .link-box {
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed var(--gold);
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        .action-btns {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 12px;
+        }
+
+        .btn-copy { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+        .btn-copy:hover { background: rgba(201, 168, 76, 0.1); color: var(--gold); }
+        .btn-wa { background: #25d366; color: white; }
+        .btn-wa:hover { background: #20ba5a; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+
+        .footer { text-align: center; margin-top: 50px; opacity: 0.4; font-size: 0.75rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Guest Management</h1>
+    <p class="sub-title">NIA & RAHIM WEDDING GENERATOR</p>
+
+    <div class="card">
+        <label>Nama Tamu Undangan</label>
+        <input type="text" id="guestName" placeholder="Contoh: Bpk. Ahmad & Istri">
+
+        <label>URL Undangan (Vercel/Domain)</label>
+        <input type="text" id="baseUrl" value="https://wedding-nia-rahim.vercel.app" placeholder="https://wedding-nia-rahim.vercel.app">
+
+        <button class="btn" onclick="generateLink()">Generate Link & Pesan</button>
+    </div>
+
+    <div id="resultArea" class="result-area card">
+        <label>Link Khusus Tamu:</label>
+        <div id="generatedLink" class="link-box"></div>
+        
+        <div class="action-btns">
+            <button class="btn btn-copy" onclick="copyLink()">Salin Link</button>
+            <button class="btn btn-wa" onclick="sendWhatsApp()">Kirim WhatsApp</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        DASHBOARD PENGELOLA TAMU<br>
+        Digital Invitation By Awal Hasibuan, S.Kom<br>
+        © 2026 Nia & Rahim
+    </div>
+</div>
+
+<script>
+    function generateLink() {
+        const name = document.getElementById('guestName').value.trim();
+        let baseUrl = document.getElementById('baseUrl').value.trim();
+
+        if (name === "" || baseUrl === "") {
+            alert("Mohon isi nama tamu dan URL website!");
+            return;
+        }
+
+        // Membersihkan slash akhir pada URL
+        if (baseUrl.endsWith('/')) {
+            baseUrl = baseUrl.slice(0, -1);
+        }
+
+        // Encode nama agar aman di URL
+        const encodedName = encodeURIComponent(name);
+        const finalLink = `${baseUrl}/index.html?to=${encodedName}`;
+
+        document.getElementById('generatedLink').innerText = finalLink;
+        document.getElementById('resultArea').style.display = 'block';
+    }
+
+    function copyLink() {
+        const link = document.getElementById('generatedLink').innerText;
+        navigator.clipboard.writeText(link).then(() => {
+            alert("Link berhasil disalin ke clipboard!");
+        });
+    }
+
+    function sendWhatsApp() {
+        const name = document.getElementById('guestName').value.trim();
+        const link = document.getElementById('generatedLink').innerText;
+        const guest = name ? name : "Tamu Undangan";
+
+        // Format Pesan Sesuai Permintaan
+        // %0A = Enter/Baris Baru
+        // %26 = Simbol &
+        const message = `Yth. Bapak/Ibu/Saudara/i%0A*${guest}*%0ADi Tempat%0A---------------------------%0A_Assalamualaikum Wr. Wb._%0ADengan segala kerendahan hati,%0Akami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,%0A=============%0A*Nia %26 Rahim*%0A=============%0A*♥️Save The Date♥️*%0A----------------%0A_Akad Nikah_%0A📅 Tanggal : *13 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A%0A_Resepsi_%0A📅 Tanggal : *14 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A_Tempat_%0A🏠 *Desa Ujung Batu, Kecamatan Sosa, Kabupaten Padang Lawas*%0A-----------------%0AUntuk detail acaranya, bisa kunjungi link berikut.👇%0A${link}%0A%0A(Note: Disarankan Menggunakan Browser Chrome)%0A%0AKami sangat berharap Bapak/Ibu/Saudara/i dan teman-teman dapat menghadiri acara tersebut,%0A--------------------------------%0AWassalamualaikum Wr. Wb,%0A🙏 Hormat Kami,%0A_Nia %26 Rahim_`;
+        
+        window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
