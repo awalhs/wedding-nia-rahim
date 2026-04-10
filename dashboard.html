@@ -9,11 +9,12 @@
         :root { --gold: #c9a84c; --dark: #0a0a0a; --dark-2: #1a1a1a; }
         body { font-family: 'Jost', sans-serif; background-color: var(--dark); color: #fff; margin: 0; padding: 20px; }
         .container { max-width: 500px; margin: 0 auto; }
-        h1 { color: var(--gold); text-align: center; margin-bottom: 20px; }
-        .card { background: var(--dark-2); padding: 25px; border-radius: 15px; border: 1px solid rgba(201, 168, 76, 0.2); margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-size: 0.8rem; color: var(--gold); text-transform: uppercase; }
-        input { width: 100%; padding: 12px; background: #222; border: 1px solid #333; color: white; border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; }
-        .btn-wa { background: #25d366; color: white; padding: 15px; border-radius: 50px; border: none; width: 100%; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 1rem; }
+        h1 { color: var(--gold); text-align: center; margin-bottom: 20px; font-weight: 600; }
+        .card { background: var(--dark-2); padding: 25px; border-radius: 15px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        label { display: block; margin-bottom: 8px; font-size: 0.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; }
+        input { width: 100%; padding: 12px; background: #222; border: 1px solid #333; color: white; border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; font-size: 1rem; }
+        .btn-wa { background: #25d366; color: white; padding: 16px; border-radius: 50px; border: none; width: 100%; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 1rem; transition: 0.3s; }
+        .btn-wa:hover { background: #20ba5a; transform: translateY(-2px); }
         .footer { text-align: center; margin-top: 30px; opacity: 0.4; font-size: 0.7rem; }
     </style>
 </head>
@@ -24,8 +25,10 @@
     <div class="card">
         <label>Nama Tamu Undangan</label>
         <input type="text" id="guestName" placeholder="Contoh: Bapak Maju Mundur">
+        
         <label>URL Undangan</label>
         <input type="text" id="baseUrl" value="https://wedding-nia-rahim.vercel.app">
+        
         <button class="btn-wa" onclick="sendWA()">Kirim Undangan Sekarang</button>
     </div>
     <div class="footer">
@@ -38,30 +41,55 @@
         const name = document.getElementById('guestName').value.trim();
         let base = document.getElementById('baseUrl').value.trim();
         
-        if(!name) return alert("Mohon isi nama tamu!");
+        if(!name) {
+            alert("Mohon isi nama tamu!");
+            return;
+        }
+
+        // 1. Bersihkan URL dari slash di akhir
         if(base.endsWith('/')) base = base.slice(0,-1);
 
-        // 1. Buat link dengan tanda + agar biru utuh di WA
+        // 2. Buat link dengan tanda + agar BIRU UTUH di WhatsApp
         const nameUrl = name.replace(/\s+/g, '+');
         const finalLink = base + "/?to=" + nameUrl;
 
-        // 2. Format Pesan (Menggunakan template string dan encodeURIComponent agar baris baru terjaga)
-        const sapaan = "Yth. Bapak/Ibu/Saudara/i\n*" + name + "*\nDi Tempat";
-        const pembuka = "---------------------------\n_Assalamualaikum Wr. Wb._\nDengan segala kerendahan hati,\nkami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,";
-        const namaMempelai = "=============\n*Nia & Rahim*\n=============";
-        const saveDate = "*♥️Save The Date♥️*\n----------------";
-        const detailAkad = "_Akad Nikah_\n📅 Tanggal : *13 April 2026*\n🕘 Pukul : *09:00 s/d Selesai*";
-        const detailResepsi = "\n\n_Resepsi_\n📅 Tanggal : *14 April 2026*\n🕘 Pukul : *09:00 s/d Selesai*";
-        const tempat = "\n_Tempat_\n🏠 *Desa Ujung Batu, Kecamatan Sosa, Kabupaten Padang Lawas*";
-        const penutupLink = "-----------------\nUntuk detail acaranya, bisa kunjungi link berikut.👇\n" + finalLink;
-        const note = "\n\n(Note: Disarankan Menggunakan Browser Chrome)";
-        const harapan = "\n\nKami sangat berharap Bapak/Ibu/Saudara/i dan teman-teman dapat menghadiri acara tersebut,\n--------------------------------";
-        const salam = "\nWassalamualaikum Wr. Wb,\n🙏 Hormat Kami,\n_Nia & Rahim_";
+        // 3. Susun Pesan dengan karakter \n untuk baris baru
+        const pesan = 
+            "Yth. Bapak/Ibu/Saudara/i\n" +
+            "*" + name + "*\n" +
+            "Di Tempat\n" +
+            "---------------------------\n" +
+            "_Assalamualaikum Wr. Wb._\n" +
+            "Dengan segala kerendahan hati,\n" +
+            "kami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,\n" +
+            "=============\n" +
+            "*Nia & Rahim*\n" +
+            "=============\n" +
+            "*♥️Save The Date♥️*\n" +
+            "----------------\n" +
+            "_Akad Nikah_\n" +
+            "📅 Tanggal : *13 April 2026*\n" +
+            "🕘 Pukul : *09:00 s/d Selesai*\n\n" +
+            "_Resepsi_\n" +
+            "📅 Tanggal : *14 April 2026*\n" +
+            "🕘 Pukul : *09:00 s/d Selesai*\n" +
+            "_Tempat_\n" +
+            "🏠 *Desa Ujung Batu, Kecamatan Sosa, Kabupaten Padang Lawas*\n" +
+            "-----------------\n" +
+            "Untuk detail acaranya, bisa kunjungi link berikut.👇\n" +
+            finalLink + "\n\n" +
+            "(Note: Disarankan Menggunakan Browser Chrome)\n\n" +
+            "Kami sangat berharap Bapak/Ibu/Saudara/i dan teman-teman dapat menghadiri acara tersebut,\n" +
+            "--------------------------------\n" +
+            "Wassalamualaikum Wr. Wb,\n" +
+            "🙏 Hormat Kami,\n" +
+            "_Nia & Rahim_";
 
-        const fullPesan = sapaan + "\n" + pembuka + "\n" + namaMempelai + "\n" + saveDate + "\n" + detailAkad + detailResepsi + tempat + "\n" + penutupLink + note + harapan + salam;
-
-        // 3. Kirim dengan encodeURIComponent agar karakter & dan baris baru terbaca sempurna
-        window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(fullPesan), '_blank');
+        // 4. Encode seluruh pesan agar simbol & dan baris baru terkirim dengan benar
+        const encodedPesan = encodeURIComponent(pesan);
+        
+        // 5. Eksekusi buka WhatsApp
+        window.open("https://api.whatsapp.com/send?text=" + encodedPesan, '_blank');
     }
 </script>
 
