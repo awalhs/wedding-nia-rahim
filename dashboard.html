@@ -99,9 +99,7 @@
         }
 
         .btn-copy { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
-        .btn-copy:hover { background: rgba(201, 168, 76, 0.1); color: var(--gold); }
         .btn-wa { background: #25d366; color: white; }
-        .btn-wa:hover { background: #20ba5a; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
 
         .footer { text-align: center; margin-top: 50px; opacity: 0.4; font-size: 0.75rem; line-height: 1.6; }
     </style>
@@ -114,7 +112,7 @@
 
     <div class="card">
         <label>Nama Tamu Undangan</label>
-        <input type="text" id="guestName" placeholder="Contoh: Budi Santoso & Partner">
+        <input type="text" id="guestName" placeholder="Contoh: Budi Santoso">
 
         <label>URL Undangan (Vercel)</label>
         <input type="text" id="baseUrl" value="https://wedding-nia-rahim.vercel.app" placeholder="https://wedding-nia-rahim.vercel.app">
@@ -123,7 +121,7 @@
     </div>
 
     <div id="resultArea" class="result-area card">
-        <label>Link Khusus Tamu (Gunakan Tombol Kirim WhatsApp):</label>
+        <label>Link Khusus (Spasi otomatis jadi +):</label>
         <div id="generatedLink" class="link-box"></div>
         
         <div class="action-btns">
@@ -149,15 +147,13 @@
             return;
         }
 
-        // Hapus slash di akhir URL agar format rapi
         if (baseUrl.endsWith('/')) {
             baseUrl = baseUrl.slice(0, -1);
         }
 
-        // Trik Spasi: Menggunakan encodeURIComponent 
-        // agar spasi menjadi %20 (Link utuh di WhatsApp, tanpa tanda + di browser)
-        const encodedName = encodeURIComponent(name);
-        const finalLink = `${baseUrl}/?to=${encodedName}`;
+        // OTOMATIS MENGUBAH SPASI MENJADI TANDA PLUS (+)
+        const nameWithPlus = name.replace(/\s+/g, '+');
+        const finalLink = `${baseUrl}/?to=${nameWithPlus}`;
 
         document.getElementById('generatedLink').innerText = finalLink;
         document.getElementById('resultArea').style.display = 'block';
@@ -166,17 +162,18 @@
     function copyLink() {
         const link = document.getElementById('generatedLink').innerText;
         navigator.clipboard.writeText(link).then(() => {
-            alert("Link berhasil disalin ke clipboard!");
+            alert("Link berhasil disalin!");
         });
     }
 
     function sendWhatsApp() {
         const name = document.getElementById('guestName').value.trim();
         const link = document.getElementById('generatedLink').innerText;
-        const guest = name ? name : "Tamu Undangan";
+        
+        // Nama di teks pesan tetap pakai spasi biasa agar rapi
+        const guestText = name ? name : "Tamu Undangan";
 
-        // TEMPLATE PESAN NIA & RAHIM (UTUH)
-        const message = `Yth. Bapak/Ibu/Saudara/i%0A*${guest}*%0ADi Tempat%0A---------------------------%0A_Assalamualaikum Wr. Wb._%0ADengan segala kerendahan hati,%0Akami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,%0A=============%0A*Nia %26 Rahim*%0A=============%0A*♥️Save The Date♥️*%0A----------------%0A_Akad Nikah_%0A📅 Tanggal : *13 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A%0A_Resepsi_%0A📅 Tanggal : *14 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A_Tempat_%0A🏠 *Desa Ujung Batu, Kecamatan Sosa, Kabupaten Padang Lawas*%0A-----------------%0AUntuk detail acaranya, bisa kunjungi link berikut.👇%0A${link}%0A%0A(Note: Disarankan Menggunakan Browser Chrome)%0A%0AKami sangat berharap Bapak/Ibu/Saudara/i dan teman-teman dapat menghadiri acara tersebut,%0A--------------------------------%0AWassalamualaikum Wr. Wb,%0A🙏 Hormat Kami,%0A_Nia %26 Rahim_`;
+        const message = `Yth. Bapak/Ibu/Saudara/i%0A*${guestText}*%0ADi Tempat%0A---------------------------%0A_Assalamualaikum Wr. Wb._%0ADengan segala kerendahan hati,%0Akami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,%0A=============%0A*Nia %26 Rahim*%0A=============%0A*♥️Save The Date♥️*%0A----------------%0A_Akad Nikah_%0A📅 Tanggal : *13 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A%0A_Resepsi_%0A📅 Tanggal : *14 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A_Tempat_%0A🏠 *Desa Ujung Batu, Kecamatan Sosa, Kabupaten Padang Lawas*%0A-----------------%0AUntuk detail acaranya, bisa kunjungi link berikut.👇%0A${link}%0A%0A(Note: Disarankan Menggunakan Browser Chrome)%0A%0AKami sangat berharap Bapak/Ibu/Saudara/i dan teman-teman dapat menghadiri acara tersebut,%0A--------------------------------%0AWassalamualaikum Wr. Wb,%0A🙏 Hormat Kami,%0A_Nia %26 Rahim_`;
         
         window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
     }
