@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Kelola Tamu - Jul & Muna</title>
+    <title>Dashboard Kelola Tamu - Nia & Rahim</title>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -110,20 +110,20 @@
 
 <div class="container">
     <h1>Guest Management</h1>
-    <p class="sub-title">JUL & MUNA WEDDING GENERATOR</p>
+    <p class="sub-title">NIA & RAHIM WEDDING GENERATOR</p>
 
     <div class="card">
         <label>Nama Tamu Undangan</label>
-        <input type="text" id="guestName" placeholder="Contoh: Bpk. Ahmad & Partner">
+        <input type="text" id="guestName" placeholder="Contoh: Tuan Oke Gas">
 
-        <label>URL Undangan (Vercel/Domain)</label>
-        <input type="text" id="baseUrl" value="https://wedding-jul-muna.vercel.app" placeholder="https://wedding-jul-muna.vercel.app">
+        <label>URL Undangan (Vercel)</label>
+        <input type="text" id="baseUrl" value="https://wedding-nia-rahim.vercel.app" placeholder="https://wedding-nia-rahim.vercel.app">
 
         <button class="btn" onclick="generateLink()">Generate Link & Pesan</button>
     </div>
 
     <div id="resultArea" class="result-area card">
-        <label>Link Khusus Tamu:</label>
+        <label>Link Khusus Tamu (Klik "Kirim WhatsApp" untuk tes):</label>
         <div id="generatedLink" class="link-box"></div>
         
         <div class="action-btns">
@@ -135,53 +135,11 @@
     <div class="footer">
         DASHBOARD PENGELOLA TAMU<br>
         Digital Invitation By Awal Hasibuan, S.Kom<br>
-        © 2026 Jul & Muna
+        © 2026 Nia & Rahim
     </div>
 </div>
 
 <script>
     function generateLink() {
         const name = document.getElementById('guestName').value.trim();
-        let baseUrl = document.getElementById('baseUrl').value.trim();
-
-        if (name === "" || baseUrl === "") {
-            alert("Mohon isi nama tamu dan URL website!");
-            return;
-        }
-
-        // Hilangkan slash di akhir URL jika ada
-        if (baseUrl.endsWith('/')) {
-            baseUrl = baseUrl.slice(0, -1);
-        }
-
-        // PERBAIKAN: Menggunakan encodeURIComponent dan mengganti spasi menjadi %20 agar tidak jadi tanda plus (+)
-        const encodedName = encodeURIComponent(name).replace(/%20/g, '%20');
-        const finalLink = `${baseUrl}/index.html?to=${encodedName}`;
-
-        document.getElementById('generatedLink').innerText = finalLink;
-        document.getElementById('resultArea').style.display = 'block';
-    }
-
-    function copyLink() {
-        const link = document.getElementById('generatedLink').innerText;
-        navigator.clipboard.writeText(link).then(() => {
-            alert("Link berhasil disalin ke clipboard!");
-        });
-    }
-
-    function sendWhatsApp() {
-        const name = document.getElementById('guestName').value.trim();
-        const link = document.getElementById('generatedLink').innerText;
-        const guest = name ? name : "Tamu Undangan";
-
-        // Format Pesan Khusus Jul & Muna
-        // %0A = Baris baru (Enter)
-        // %26 = Simbol &
-        const message = `Yth. Bapak/Ibu/Saudara/i%0A*${guest}*%0ADi Tempat%0A---------------------------%0A_Assalamualaikum Wr. Wb._%0ADengan segala kerendahan hati,%0Akami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,%0A=============%0A*Jul %26 Muna*%0A=============%0A*♥️Save The Date♥️*%0A----------------%0A*_Resepsi_*%0A📅 Tanggal : *15 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A_Tempat_%0A🏠 *Desa Papaso II, Kecamatan Sosa Timur, Kabupaten Padang Lawas*%0A-----------------%0A%0AUntuk detail acaranya, bisa kunjungi link berikut.👇%0A${link}%0A%0A(Note: Disarankan Menggunakan Browser Chrome)%0A%0AKami sangat berharap Bapak/Ibu/Saudara/i dan teman-teman dapat menghadiri acara tersebut,%0A--------------------------------%0AWassalamualaikum Wr. Wb,%0A🙏 Hormat Kami,%0A_Jul %26 Muna_`;
-        
-        window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
-    }
-</script>
-
-</body>
-</html>
+        let baseUrl = document.getElementById
