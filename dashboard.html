@@ -26,14 +26,14 @@
     <h1>Guest Manager</h1>
     <div class="card">
         <label>Nama Tamu Undangan</label>
-        <input type="text" id="guestName" placeholder="Contoh: Bapak Maju Mundur">
+        <input type="text" id="guestName" placeholder="Contoh: Bapak Bapak Bapak">
         <label>URL Undangan</label>
         <input type="text" id="baseUrl" value="https://wedding-nia-rahim.vercel.app">
-        <button class="btn" onclick="generate()">Generate Link & Pesan</button>
+        <button class="btn" onclick="generate()">Buat Link & Pesan</button>
     </div>
 
     <div id="resultArea" class="result-area card">
-        <label>Link Khusus Tamu (Otomatis +):</label>
+        <label>Preview Link (Link Biru Utuh):</label>
         <div id="generatedLink" class="link-box"></div>
         <button class="btn-wa" onclick="sendWA()">Kirim WhatsApp Sekarang</button>
     </div>
@@ -53,9 +53,9 @@
         if(!name) return alert("Mohon isi nama tamu!");
         if(base.endsWith('/')) base = base.slice(0,-1);
 
-        // OTOMATIS GANTI SPASI KE + UNTUK LINK AGAR TIDAK TERPUTUS
-        const nameWithPlus = name.replace(/\s+/g, '+');
-        const finalLink = base + "/?to=" + nameWithPlus;
+        // Langkah 1: Ubah spasi ke + untuk tampilan link di kotak preview
+        const namePlus = name.replace(/\s+/g, '+');
+        const finalLink = base + "/?to=" + namePlus;
 
         document.getElementById('generatedLink').innerText = finalLink;
         document.getElementById('resultArea').style.display = 'block';
@@ -63,10 +63,15 @@
 
     function sendWA() {
         const name = document.getElementById('guestName').value.trim();
-        const link = document.getElementById('generatedLink').innerText;
-        
-        // Sapaan tetap pakai spasi (name), Link di bawah pakai tanda + (link)
-        const text = `Yth. Bapak/Ibu/Saudara/i%0A*${name}*%0ADi Tempat%0A---------------------------%0A_Assalamualaikum Wr. Wb._%0ADengan segala kerendahan hati,%0Akami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,%0A=============%0A*Nia %26 Rahim*%0A=============%0A*♥️Save The Date♥️*%0A----------------%0A_Akad Nikah_%0A📅 Tanggal : *13 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A%0A_Resepsi_%0A📅 Tanggal : *14 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A_Tempat_%0A🏠 *Desa Ujung Batu, Kecamatan Sosa, Kabupaten Padang Lawas*%0A-----------------%0AUntuk detail acaranya, bisa kunjungi link berikut.👇%0A${link}%0A%0A(Note: Disarankan Menggunakan Browser Chrome)%0A%0AKami sangat berharap Bapak/Ibu/Saudara/i dan teman-teman dapat menghadiri acara tersebut,%0A--------------------------------%0AWassalamualaikum Wr. Wb,%0A🙏 Hormat Kami,%0A_Nia %26 Rahim_`;
+        let base = document.getElementById('baseUrl').value.trim();
+        if(base.endsWith('/')) base = base.slice(0,-1);
+
+        // Langkah 2: Buat variabel link yang sudah pakai tanda +
+        const nameUrl = name.replace(/\s+/g, '+');
+        const linkWithPlus = base + "/?to=" + nameUrl;
+
+        // Langkah 3: Masukkan linkWithPlus ke dalam pesan
+        const text = `Yth. Bapak/Ibu/Saudara/i%0A*${name}*%0ADi Tempat%0A---------------------------%0A_Assalamualaikum Wr. Wb._%0ADengan segala kerendahan hati,%0Akami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara,%0A=============%0A*Nia %26 Rahim*%0A=============%0A*♥️Save The Date♥️*%0A----------------%0A_Akad Nikah_%0A📅 Tanggal : *13 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A%0A_Resepsi_%0A📅 Tanggal : *14 April 2026*%0A🕘 Pukul : *09:00 s/d Selesai*%0A_Tempat_%0A🏠 *Desa Ujung Batu, Kecamatan Sosa, Kabupaten Padang Lawas*%0A-----------------%0AUntuk detail acaranya, bisa kunjungi link berikut.👇%0A${linkWithPlus}%0A%0A(Note: Disarankan Menggunakan Browser Chrome)%0A%0AKami sangat berharap Bapak/Ibu/Saudara/i dan teman-teman dapat menghadiri acara tersebut,%0A--------------------------------%0AWassalamualaikum Wr. Wb,%0A🙏 Hormat Kami,%0A_Nia %26 Rahim_`;
 
         window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
     }
